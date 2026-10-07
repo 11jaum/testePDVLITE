@@ -1,0 +1,83 @@
+ADEGA PDV 2.2.0 LITE
+=====================
+
+OBJETIVO
+Versão otimizada para computadores mais lentos, mantendo as funções principais
+do Adega PDV e reduzindo carga de CPU, GPU, memória e consultas desnecessárias.
+
+PRINCIPAIS OTIMIZAÇÕES
+
+1. CARREGAMENTO SOB DEMANDA
+- PDV só carrega quando a aba PDV é aberta.
+- Estoque e categorias só carregam ao abrir Estoque.
+- Caixa só carrega ao abrir Caixa.
+- Relatórios e histórico de vendas só carregam ao abrir Relatórios.
+- Usuários, Auditoria e Configurações só carregam quando essas abas são abertas.
+- Na inicialização ficam apenas sessão, configurações básicas e Dashboard.
+
+2. DASHBOARD MAIS LEVE
+- Indicadores operacionais atualizam a cada 20 segundos.
+- Gráficos, ranking, categorias e dados completos atualizam a cada 2 minutos.
+- Ao abrir o Dashboard ou clicar em Atualizar, a carga completa é feita.
+- Voltar para a janela não recalcula todos os gráficos a cada foco.
+
+3. PDV OTIMIZADO PARA CATÁLOGOS GRANDES
+- Sem pesquisa, exibe até 80 cards simultaneamente.
+- Com pesquisa, exibe até 120 resultados.
+- Todos os produtos continuam pesquisáveis por nome/código.
+- Isso reduz muito a quantidade de elementos HTML em catálogos com centenas
+  ou milhares de produtos.
+
+4. ESTOQUE OTIMIZADO
+- A tabela exibe até 150 itens por vez.
+- Os demais continuam acessíveis pela pesquisa e filtros.
+- Evita montar centenas de linhas/botões simultaneamente.
+
+5. INTERFACE MAIS LEVE
+- Animações e transições praticamente desativadas.
+- Efeitos de blur/backdrop-filter removidos no aplicativo principal.
+- Sombras pesadas simplificadas.
+- Skeletons sem animação contínua.
+- MutationObservers globais pesados desativados no modo leve.
+
+6. SQLITE
+- Cache de 8 MB em memória.
+- Tabelas temporárias preferencialmente em memória.
+- Novos índices para vendas, itens, pagamentos, estoque e histórico.
+- PRAGMA optimize executado na inicialização.
+- Consulta dos cards de vendas usa intervalo indexável em vez de DATE()
+  sobre cada linha.
+
+O QUE NÃO FOI REMOVIDO
+- PDV
+- Comandas
+- Estoque
+- Inventário
+- Caixa
+- Relatórios
+- Fechamento mensal
+- Usuários e permissões
+- Auditoria
+- Configurações
+- Backup e restauração
+- Atualizador
+- Licenciamento
+- Produtos fracionados
+- Importação XLSX
+- Pagamento dividido
+
+OBSERVAÇÃO
+O modo leve prioriza resposta rápida. Em listas muito grandes, o sistema
+mostra uma parte dos registros na tela e pede que a pesquisa/filtro seja usada
+para encontrar os demais. Nenhum produto é apagado ou ignorado no banco.
+
+LICENÇAS
+As licenças existentes continuam compatíveis.
+
+TESTE RECOMENDADO
+1. Abrir o programa e medir o tempo até o Dashboard.
+2. Abrir PDV com 500+ produtos.
+3. Pesquisar um produto que não esteja entre os primeiros cards.
+4. Abrir Estoque e pesquisar itens além dos 150 iniciais.
+5. Fazer venda e conferir estoque/caixa.
+6. Testar Comandas, Inventário, Relatórios e Backup.
